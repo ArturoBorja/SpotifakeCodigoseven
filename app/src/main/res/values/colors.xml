@@ -3,4 +3,11 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+<<<<<<< Updated upstream
+=======
+    <color name="Backgroundone">#3A3A3A</color>
+    <color name="Elementone">#FF6600</color>
+    <color name="Textone">#FFFFFF</color>
+    <color name="background_toolbar">#e3333333</color>
+>>>>>>> Stashed changes
 </resources>
