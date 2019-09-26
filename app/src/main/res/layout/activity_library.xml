@@ -1,27 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Library"
-    android:orientation="vertical"
-
+    android:background="@color/Backgroundone"
 
     >
 
-    <TextView
-        android:id="@+id/txt_library"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:scrollbars="vertical"
-        android:text="TextView"
-        android:layout_weight=".8"/>
 
-    <Button
-        android:id="@+id/btn_buscar"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:text="Button"
-        android:layout_weight=".2"/>
-</LinearLayout>
+        android:layout_height="100dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent"
+        android:gravity="center_vertical">
+
+        <Button
+            android:id="@+id/button_library_playlist"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="playlist"
+
+            />
+
+        <Button
+            android:id="@+id/button_library_artista"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="artista"
+
+            />
+
+        <Button
+            android:id="@+id/button_library_album"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="albun"
+            />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/lv_library"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+
+        app:layout_constraintTop_toTopOf="parent" />
+</android.support.constraint.ConstraintLayout>

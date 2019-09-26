@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
         txt_toplaylist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent =new Intent (MainActivity.this,PlayList.class);
+                Intent intent =new Intent (MainActivity.this,Library.class);
                 startActivityForResult(intent,1);
             }
         });
