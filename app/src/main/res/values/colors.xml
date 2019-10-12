@@ -6,4 +6,7 @@
     <color name="Backgroundone">#3A3A3A</color>
     <color name="Elementone">#FF6600</color>
     <color name="Textone">#FFFFFF</color>
+    <color name="colorFondo">#3a3a3a</color>
+    <color name="colorBotones">#FF6600</color>
+    <color name="colorFuente">#FFFFFF</color>
 </resources>
