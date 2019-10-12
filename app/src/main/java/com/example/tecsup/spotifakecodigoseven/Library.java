@@ -39,7 +39,8 @@ public class Library extends AppCompatActivity {
     ListView lv_library;
     List<String> playlists;
     PlaylistAdapter library_adapter;
-
+    Intent intent;
+    String token;
     Button button_library_artista;
     Button button_library_album;
 
@@ -47,40 +48,23 @@ public class Library extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_library);
+        intent=getIntent();
         Builder();
+        ExtraerJSON("a");
+        ApretarBotones();
 
-        button_library_artista.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent inntent_artista=new Intent(Library.this,LibrArtist.class);
-                startActivityForResult(inntent_artista,2);
-             finish();
-
-            }
-        });
-        button_library_album.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent inntent_album=new Intent(Library.this,library_album.class);
-                startActivityForResult(inntent_album,3);
-              finishActivity(1);
-            }
-        });
 
     }
     public void Builder(){
+        token=intent.getStringExtra("token");
         lv_library=findViewById(R.id.lv_library);
         playlists=new ArrayList<>();
         library_adapter=new PlaylistAdapter(this,R.layout.playlist_item,playlists);
         lv_library.setAdapter(library_adapter);
-        //playlists.add("hola");
-       // playlists.add("hola");
-      //  playlists.add("hola");
-        //library_adapter.notifyDataSetChanged();
-        ExtraerJSON("a");
-
-        button_library_artista = findViewById(R.id.button_library_album_artista);
+        button_library_artista = findViewById(R.id.button_library_artista);
         button_library_album = findViewById(R.id.button_library_album);
+
+
     }
     private void ExtraerJSON(String urlspoty) {
         Log.e("chau","z");
@@ -90,19 +74,21 @@ public class Library extends AppCompatActivity {
                 try {
                     Log.e("hola","z");
                     JSONArray items = new JSONObject(response).getJSONArray("items");
-                    System.out.println("*****JARRAY*****"+items.length());
+                    Log.e("nombre",String.valueOf(items.length()));
                     for(int i=0;i<items.length();i++){
                         JSONObject json_data = items.getJSONObject(i);
                         playlists.add(json_data.getString("name"));
+                        Log.e("nombre","llego");
                     }
                     library_adapter.notifyDataSetChanged();
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    Log.e("error","z");
                 }
             }
         };
 
-
+        Log.e(""+response_listener,"aaaa");
         Response.ErrorListener response_error_listener = new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
@@ -129,7 +115,7 @@ public class Library extends AppCompatActivity {
                 Map<String, String>  params = new HashMap<String, String>();
                 params.put("Accept", "application/json");
                 params.put("Content-Type", "application/json");
-                params.put("Authorization", "Bearer BQCqzu3BoPBdAELYl1OVfTFnF8eQloPF0t_vZmGRZ6CeohfXFwlPKln6Ig-Ou_LG1JVyWqc_fTj5wQ05_-C1p37bLJWPVkgWdbwf_2LQua6yNTReafLLhoBS-23a0JxkB1qlPMR48Al5q-Jsl7SnsGXgcOimROEt4jtdOuW2xV_eB16FNhO71_A");
+                params.put("Authorization", token);
 
                 return params;
             }
@@ -137,13 +123,33 @@ public class Library extends AppCompatActivity {
 
         getRequestQueue().add(stringRequest);
     }
-
     public RequestQueue getRequestQueue() {
         if (mRequestQueue == null) {
             mRequestQueue = Volley.newRequestQueue(getApplicationContext());
         }
         return mRequestQueue;
     }
+    public void ApretarBotones(){
+        button_library_album.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent1 =new Intent(Library.this,library_album.class);
+                intent1.putExtra("token",token);
+                startActivityForResult(intent1,1);
+                finish();
+            }
+        });
+        button_library_artista.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent2 =new Intent(Library.this,LibrArtist.class);
+                intent2.putExtra("token",token);
+                startActivityForResult(intent2,2);
+                finish();
+            }
+        });
+    }
+
 
 
 }

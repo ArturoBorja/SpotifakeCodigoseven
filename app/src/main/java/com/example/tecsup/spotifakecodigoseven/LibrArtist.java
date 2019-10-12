@@ -38,47 +38,57 @@ import static java.util.stream.IntStream.builder;
 public class LibrArtist extends AppCompatActivity {
     List<String> playlists;
     Button button_LibrArtist_album;
-    Button button_LibrArtist_artista;
     Button button_LibrArtist_playlist;
+    ListView lv_librartist;
+    PlaylistAdapter library_adapter;
+    Intent intentb ;
+    String token;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_libr_artist);
+        intentb = getIntent();
         Builder();
         ApretarBotones();
 
 
     }
     public void Builder(){
+        token=intentb.getStringExtra("token");
+        lv_librartist=findViewById(R.id.lv_library_artist);
         playlists=new ArrayList<>();
-        button_LibrArtist_album =findViewById(R.id.button_library_album_album);
-        button_LibrArtist_artista =findViewById(R.id.button_library_album_artista);
-        button_LibrArtist_playlist =findViewById(R.id.button_library_album_playlist);
+        playlists.add(token);
+        library_adapter=new PlaylistAdapter(this,R.layout.playlist_item,playlists);
+        lv_librartist.setAdapter(library_adapter);
+        button_LibrArtist_album =findViewById(R.id.button_library_artist_album);
+        button_LibrArtist_playlist =findViewById(R.id.button_library_artist_playlist);
 
 
     }
     public void ApretarBotones(){
-        button_LibrArtist_album.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent inntent4 =new Intent(LibrArtist.this,library_album.class);
-                startActivityForResult(inntent4,5);
-                finish();
-            }
-        });
-
         button_LibrArtist_playlist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent5 =new Intent(LibrArtist.this,Library.class);
-                startActivityForResult(intent5,6);
+                Intent intent3 =new Intent(LibrArtist.this,Library.class);
+                intent3.putExtra("token",token);
+                startActivityForResult(intent3,3);
                 finish();
-
-
             }
         });
+        button_LibrArtist_album.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent4 =new Intent(LibrArtist.this,library_album.class);
+                startActivityForResult(intent4,4);
+
+                intent4.putExtra("token",token);
+                finish();
+            }
+        });
+
+
     }
 
 }

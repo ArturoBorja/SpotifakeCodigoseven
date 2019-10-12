@@ -117,7 +117,7 @@ public class PlayList extends AppCompatActivity {
         };
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET,
-                "https://api.spotify.com/v1/playlists/2olTCQZu28cI5umlosqyhn",
+                "https://api.spotify.com/v1/me/playlists",
                 response_listener,response_error_listener)
         {
             @Override
@@ -125,7 +125,7 @@ public class PlayList extends AppCompatActivity {
                 Map<String, String>  params = new HashMap<String, String>();
                 params.put("Accept", "application/json");
                 params.put("Content-Type", "application/json");
-                params.put("Authorization", "Bearer BQBMayLcg7sub2b8PPeQlCVSiMKAt-xyroK83TGspwLjsvnXpQ9hxOkQxfPAJh9l0R9f2z3JYnJyekTW6eO0TSz3H3lht6pILRju-g72RK3V6CPdrjJ34_Iz7HH9dYcPKZPTTo5tisL8wmhZOtaClJXVGEcCwyQ");
+                params.put("Authorization", "Bearer BQBwe9UK3HuadpKVp_9zyKGSsKxw_4xLpghtLLzzz87ieUvuZP_VZ7MTY4xRUQGgSAqXaRO3C-GTs-bdAhDTv2nalHEvIHlsD7jxaOnQSPnWEavoJGrovEApahO3K19KwnasKTfkLvbk7_p-AwKs5skOWGzBwoi4pQCcyLhHH6zgpu3kKtesA1AAQQ4");
 
                 return params;
             }
